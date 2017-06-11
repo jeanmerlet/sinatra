@@ -1,2 +1,2 @@
-require './web_cipher.rb'
+require './web_cipher'
 run Sinatra::Application
