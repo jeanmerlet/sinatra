@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#board{
+  width:300px;
+  height:700px;
+  background:brown;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -350px;
+  margin-left: -150px;
+}
+
+#ball_input_container{
+  width: 215px;
+  height: 40px;
+  background: white;
+  margin: 10px auto;
+  margin-top: 75px;
+}
+
+.row{
+  width: 200px;
+  height: 40px;
+  background: blue;
+  margin: 5px auto;
+}
+
+.circle{
+  width: 30px;
+  height: 30px;
+  background: black;
+  margin: 5px;
+  margin-right: 0;
+  border-radius: 50%;
+  display: inline-block;
+  float: left;
+}
+
+.feedback{
+  width: 34px;
+  height: 34px;
+  background: green;
+  margin: 3px;
+  display: inline-block;
+  float: right;
+  
+}
