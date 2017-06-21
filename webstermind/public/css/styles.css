@@ -4,36 +4,56 @@ body {
 }
 
 #board{
-  width:300px;
-  height:700px;
-  background:brown;
+  width: 290px;
+  height: 700px;
+  background: #75411c;
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -350px;
   margin-left: -150px;
+  border-radius: 15px;
+}
+
+#title_container{
+  width: 250px;
+  height: 50px;
+  margin: 10px auto;
+  text-align: center;
+  font-weight: bold;
+  font-family: arial;
+  font-size: 40px;
+}
+
+#title{
+  line-height: 55px;
+  vertical-align: middle;
 }
 
 #ball_input_container{
-  width: 215px;
+  width: 200px;
   height: 40px;
   background: white;
-  margin: 10px auto;
-  margin-top: 75px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .row{
-  width: 200px;
+  width: 180px;
   height: 40px;
-  background: blue;
+  background: #5e3315;
   margin: 5px auto;
+  border: 1px black solid;
+  border-radius: 5px;
 }
 
 .circle{
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   background: black;
-  margin: 5px;
+  margin: 15px;
+  margin-left: 20px;
   margin-right: 0;
   border-radius: 50%;
   display: inline-block;
@@ -41,11 +61,11 @@ body {
 }
 
 .feedback{
-  width: 34px;
-  height: 34px;
-  background: green;
-  margin: 3px;
+  width: 29px;
+  height: 29px;
+  margin: 5px;
   display: inline-block;
+  border: 1px black solid;
+  border-radius: 3px;
   float: right;
-  
 }
