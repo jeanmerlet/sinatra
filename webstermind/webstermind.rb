@@ -25,7 +25,7 @@ post '/mastermind/play' do
 
 
 
-  erb :game_board, :locals => {:game_type => game_type, :board => board}
+  erb :game_board, :locals => {:game_type => game_type, :board => board, :row => turn, :spot => spot}
 end
 
 class Mastermind
