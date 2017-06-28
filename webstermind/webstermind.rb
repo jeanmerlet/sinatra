@@ -7,7 +7,6 @@ configure do
 end
 
 get '/' do
-  @session = session
   erb :index
 end
 
@@ -15,33 +14,38 @@ get '/mastermind/choose' do
   erb :choose_game_type
 end
 
-post '/mastermind/play' do
-  game_type = params["submit"]
-  code = params["code"]
+get '/mastermind/play' do
+  game_type = params["game_type"]
+  code = ""
+  game = Mastermind.new
+  game.choose_game_type(game_type)
+  game.create_code(code)
+  game.create_board(game.code)
 
-  mastermind = Mastermind.new
-  mastermind.choose_game_type(game_type)
-  board = ""
-
-
-
-  erb :game_board, :locals => {:game_type => game_type, :board => board, :row => turn, :spot => spot}
+  #redirect to ('/mastermind/play')
+  erb :game_board, :locals => {:row => game.turn, :spot => game.spot}
 end
 
 class Mastermind
 
+  attr_reader :turn, :spot, :code
+
   def initialize
-    @turn = 0
+    @turn = 1
   end
 
   def play
-    until @board.solved? || @turn == 12
+    until @board.solved? || @turn == 13
       guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback)
+      #replace with le submit
+      guess = 
+
+
       @board.update_guesses(guess)
       @board.update_feedback
-      @board.render
 
-      @turn += 1
+      @spot += 1
+      redirect to ('/mastermind/play')
     end
 
     @board.solved? ? win : lose
@@ -49,6 +53,14 @@ class Mastermind
 
   def choose_game_type(game_type)
     game_type == 'codemaster' ? codemaster_start : codebreaker_start
+  end
+
+  def create_code(code)
+    @code = @codemaster.create_code(code)
+  end
+
+  def create_board(code)
+    @board = Board.new(code)
   end
 
   private
@@ -80,16 +92,6 @@ class Board
     @code = code
     @guesses = []
     @feedback = []
-  end
-
-  def render
-    swap = @guesses.length
-    12.times do |i|
-      print "\n -------------\n"
-      print i < swap ? "| #{@guesses[i]} | #{@feedback[i]} |" : "|      |      |"
-    end
-    print "\n -------------\n"
-    puts "\nPlease type 4 of BGOPRW for your guess:"
   end
 
   def update_feedback
