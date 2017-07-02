@@ -1,54 +1,47 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 
-configure do
-  enable :sessions
-  set :session_secret, "meow"
-end
-
 get '/' do
   erb :index
 end
 
 get '/mastermind/choose' do
+  @@game = Mastermind.new    #probs a db would be better
   erb :choose_game_type
 end
 
 get '/mastermind/play' do
   game_type = params["game_type"]
-  code = ""
-  game = Mastermind.new
-  game.choose_game_type(game_type)
-  game.create_code(code)
-  game.create_board(game.code)
+  if game_type != nil   #this seems really ugly
+    code = ""
+    @@game.choose_game_type(game_type)
+    @@game.create_code(code)
+    @@game.create_board(@@game.code)
+  end
 
-  #redirect to ('/mastermind/play')
-  erb :game_board, :locals => {:row => game.turn, :spot => game.spot}
+  p @@game.turn
+  erb :game_board, :locals => {:row => @@game.turn, :feedback => @@game.board.feedback.last}
+end
+
+get /\/mastermind\/([RGBOPW]{4})/ do
+  guess = params['captures'].first
+  @@game.guess(guess)
+  redirect to ('/mastermind/play')
 end
 
 class Mastermind
 
-  attr_reader :turn, :spot, :code
+  attr_reader :turn, :spot, :code, :board
 
   def initialize
     @turn = 1
   end
 
-  def play
-    until @board.solved? || @turn == 13
-      guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback)
-      #replace with le submit
-      guess = 
-
-
+  def guess(guess)
       @board.update_guesses(guess)
       @board.update_feedback
 
-      @spot += 1
-      redirect to ('/mastermind/play')
-    end
-
-    @board.solved? ? win : lose
+      @turn += 1
   end
 
   def choose_game_type(game_type)
@@ -73,14 +66,6 @@ class Mastermind
   def codebreaker_start
     @codemaster = AI::Codemaster.new
     @codebreaker = Player::Codebreaker.new
-  end
-
-  def win
-    #puts "You guessed the code - you win! :>"
-  end
-
-  def lose
-    #puts "You're out of turns - you lose! :<"
   end
 end
 

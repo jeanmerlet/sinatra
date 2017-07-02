@@ -16,15 +16,15 @@ function turn_submit(row) {
   for (i = 0; i < 4; i++) {
     var guess = guess.concat(row.children[i].children[0].alt.charAt(0).toUpperCase())
     console.log(guess)
-    //now to ajax this over to the server...
-    function guess_and_feedback(guess);
   }
+  //now to ajax this over to the server...
+  guess_and_feedback(guess)
 }
 
 function guess_and_feedback(guess) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == XMLHttpRquest.DONE && xmlhttp.status == 200) {
+    if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
       //post feedback
     }
   }
