@@ -1,28 +1,28 @@
 <script type="text/javascript" src="/scripts/scripts.js" async></script>
     <div id="board">
-      <div id="title_container"><span id="title"><%= row %></span></div>
+      <div id="title_container"><span id="title">Mastermind</span></div>
       <div id="ball_input_container">
         <div class="circle">
-          <img onclick="ball_picker('blue', <%= row.to_s %>);" src="/images/blue_ball.png"  alt="blue ball">
+          <img onclick="ball_picker('blue');" src="/images/blue_ball.png"  alt="blue ball">
         </div>
         <div class="circle">
-          <img onclick="ball_picker('green', <%= row.to_s %>);" src="/images/green_ball.png" alt="green ball">
+          <img onclick="ball_picker('green');" src="/images/green_ball.png" alt="green ball">
         </div>
         <div class="circle">
-          <img onclick="ball_picker('orange', <%= row.to_s %>);" src="/images/orange_ball.png" alt="orange ball">
+          <img onclick="ball_picker('orange');" src="/images/orange_ball.png" alt="orange ball">
         </div>
         <div class="circle">
-          <img onclick="ball_picker('purple', <%= row.to_s %>);" src="/images/purple_ball.png" alt="purple ball">
+          <img onclick="ball_picker('purple');" src="/images/purple_ball.png" alt="purple ball">
         </div>
         <div class="circle">
-          <img onclick="ball_picker('red', <%= row.to_s %>);" src="/images/red_ball.png" alt="red ball">
+          <img onclick="ball_picker('red');" src="/images/red_ball.png" alt="red ball">
         </div>
         <div class="circle">
-          <img onclick="ball_picker('white', <%= row.to_s %>);" src="/images/white_ball.png" alt="white ball">
+          <img onclick="ball_picker('white');" src="/images/white_ball.png" alt="white ball">
         </div>
       </div>
       <div id="turn_submit">
-        <button type="button" onclick="turn_submit(<%= row %>);">Guess!</button>
+        <button type="button" onclick="turn_submit();">Guess!</button>
       </div>
       <div class="row" id="1">
         <div class="circle"></div>

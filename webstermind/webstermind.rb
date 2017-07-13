@@ -1,12 +1,16 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 
+before do
+  cache_control :public, :must_revalidate, :max_age => 60
+end
+
 get '/' do
   erb :index
 end
 
 get '/mastermind/choose' do
-  @@game = Mastermind.new    #probs a db would be better
+  @@game = Mastermind.new    #probs a db would be better, or?
   erb :choose_game_type
 end
 
@@ -19,8 +23,11 @@ get '/mastermind/play' do
     @@game.create_board(@@game.code)
   end
 
-  p @@game.turn
-  erb :game_board, :locals => {:row => @@game.turn, :feedback => @@game.board.feedback.last}
+  erb :game_board, :locals => {:feedback => @@game.board.feedback.last}
+end
+
+get '/mastermind/current_row' do
+  @@game.turn
 end
 
 get /\/mastermind\/([RGBOPW]{4})/ do
