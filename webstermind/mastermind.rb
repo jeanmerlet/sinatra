@@ -1,8 +1,8 @@
 class Mastermind
-  attr_reader :turn, :spot, :code, :board
+  attr_reader :turn, :spot, :code, :board, :codebreaker
 
   def initialize
-    @turn = 0
+    @turn = 1
   end
 
   def guess(guess)
@@ -120,7 +120,7 @@ class AI
     end
 
     def guess(turn, guesses, feedback)
-      return "BBGG" if turn == 0
+      return "BBGG" if turn == 1
       @parsed_feedback << count_feedback(turn, feedback)
       eliminate_bad_guesses(turn, guesses)
       @code_set[0]

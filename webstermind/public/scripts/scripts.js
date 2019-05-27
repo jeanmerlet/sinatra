@@ -1,7 +1,17 @@
 var spot = 0
+var turn = 1
 
-function ball_picker(color) {
-  var row = document.getElementById(obtain_current_row())
+function code_or_not(is_code) {
+  if (is_code == true) {
+    return "code"
+  } else {
+    return turn.toString()
+  }
+}
+
+function ball_picker(color, is_code) {
+  var id = code_or_not(is_code)
+  var row = document.getElementById(id)
   row.children[spot].innerHTML = "<img src='/images/" + color + "_ball.png' alt='" + color + " ball'>"
   if (spot < 3) {
     spot ++
@@ -10,35 +20,25 @@ function ball_picker(color) {
   }
 }
 
-function turn_submit() {
-  var guess = ""
-  var row = document.getElementById(obtain_current_row())
+function turn_submit(is_code) {
+  var input = ""
+  var id = code_or_not(is_code)
+  var row = document.getElementById(id)
   for (i = 0; i < 4; i++) {
-    var guess = guess.concat(row.children[i].children[0].alt.charAt(0).toUpperCase())
-    console.log(guess)
+    var input = input.concat(row.children[i].children[0].alt.charAt(0).toUpperCase())
   }
-  guess_and_feedback(guess)  //ajax
+  //console.log(id)
+  //console.log(guess)
+  guess(input)  //ajax
 }
 
-function obtain_current_row() {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-      meow = xmlhttp.response
-      alert(meow)
-    }
-  }
-  xmlhttp.open("GET", "current_row", true);
-  xmlhttp.send();
-}
-
-function guess_and_feedback(guess) {
+function guess(input) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
     }
   }
 
-  xmlhttp.open("GET", guess, true);
+  xmlhttp.open("GET", input, true);
   xmlhttp.send();
 }

@@ -82,6 +82,18 @@ button {
   float: left;
 }
 
+.code_circle{
+  width: 10px;
+  height: 10px;
+  background: black;
+  margin: 15px;
+  margin-left: 28px;
+  margin-right: 0;
+  border-radius: 50%;
+  display: inline-block;
+  float: left;
+}
+
 .feedback{
   width: 29px;
   height: 29px;
