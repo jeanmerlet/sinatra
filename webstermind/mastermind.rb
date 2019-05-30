@@ -1,15 +1,15 @@
 class Mastermind
-  attr_reader :turn, :spot, :code, :board, :codebreaker
+  attr_reader :board, :code, :codebreaker, :full_name_guesses
 
   def initialize
-    @turn = 1
+    @turn = 0
+    @full_name_guesses = Array.new(12, "")
   end
 
-  def guess(guess)
-    if guess == "ai"
-      guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback)
-    end
+  def guess(guess = nil)
+    guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback, guess)
     @board.update_guesses(guess)
+    @full_name_guesses[@turn] = full_names(@board.guesses[@turn])
     @board.update_feedback
     @turn += 1
   end
@@ -24,6 +24,22 @@ class Mastermind
 
   def create_board(code)
     @board = Board.new(code)
+  end
+
+  def full_names(guess)
+    result = []
+    4.times do |i|
+      current_color = guess[i]
+      case current_color
+      when 'B' then result << 'blue'
+      when 'G' then result << 'green'
+      when 'O' then result << 'orange'
+      when 'P' then result << 'purple'
+      when 'R' then result << 'red'
+      when 'W' then result << 'white'
+      end
+    end
+    result
   end
 
   private
@@ -91,8 +107,8 @@ class Human
 
   class Codebreaker < Human
 
-    def guess(a, b, c)
-      four_color_input
+    def guess(a, b, c, guess)
+      guess
     end
   end
 end
@@ -119,8 +135,8 @@ class AI
       @parsed_feedback = []
     end
 
-    def guess(turn, guesses, feedback)
-      return "BBGG" if turn == 1
+    def guess(turn, guesses, feedback, guess)
+      return "BBGG" if turn == 0
       @parsed_feedback << count_feedback(turn, feedback)
       eliminate_bad_guesses(turn, guesses)
       @code_set[0]

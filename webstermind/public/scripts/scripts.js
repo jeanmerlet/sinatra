@@ -1,18 +1,8 @@
 var spot = 0
-var turn = 1
 
-function code_or_not(is_code) {
-  if (is_code == true) {
-    return "code"
-  } else {
-    return turn.toString()
-  }
-}
-
-function ball_picker(color, is_code) {
-  var id = code_or_not(is_code)
-  var row = document.getElementById(id)
-  row.children[spot].innerHTML = "<img src='/images/" + color + "_ball.png' alt='" + color + " ball'>"
+function ball_picker(color) {
+  var div = document.getElementById("ball_display")
+  div.children[spot].innerHTML = "<img src='/images/" + color + "_ball.png' alt='" + color + " ball'>"
   if (spot < 3) {
     spot ++
   } else {
@@ -21,24 +11,21 @@ function ball_picker(color, is_code) {
 }
 
 function turn_submit(is_code) {
-  var input = ""
-  var id = code_or_not(is_code)
-  var row = document.getElementById(id)
+  var guess = ""
+  var ball_display = document.getElementById("ball_display")
   for (i = 0; i < 4; i++) {
-    var input = input.concat(row.children[i].children[0].alt.charAt(0).toUpperCase())
+    var guess = guess.concat(ball_display.children[i].children[0].alt.charAt(0).toUpperCase())
   }
-  //console.log(id)
-  //console.log(guess)
-  guess(input)  //ajax
+  send_guess(guess)
 }
 
-function guess(input) {
+function send_guess(guess) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
+      window.location = "/mastermind/play"
     }
   }
-
-  xmlhttp.open("GET", input, true);
-  xmlhttp.send();
+  xmlhttp.open("GET", guess, true);
+  xmlhttp.send(null);
 }

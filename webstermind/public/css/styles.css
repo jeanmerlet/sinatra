@@ -16,18 +16,19 @@ button {
   position: center;
   font-family: "Aldrich";
   font-size: 18px;
+  margin: 5px auto;
   margin-left: 25px;
   border-radius: 3px;
 }
 
 #board{
   width: 290px;
-  height: 725px;
+  height: 780px;
   background: #75411c;
   position: fixed;
   top: 50%;
   left: 50%;
-  margin-top: -350px;
+  margin-top: -380px;
   margin-left: -150px;
   border-radius: 15px;
 }
@@ -47,18 +48,27 @@ button {
   vertical-align: middle;
 }
 
-#turn_submit{
-  width: 150px;
-  height: 35px;
-  margin: 0 auto;
-}
-
 #ball_input_container{
   width: 200px;
   height: 40px;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   margin-top: -10px;
+}
+
+#ball_display{
+  width: 140px;
+  height: 40px;
+  background: #5e3315;
+  margin: 5px auto;
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+#turn_submit{
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
 }
 
 .row{
@@ -76,18 +86,6 @@ button {
   background: black;
   margin: 15px;
   margin-left: 20px;
-  margin-right: 0;
-  border-radius: 50%;
-  display: inline-block;
-  float: left;
-}
-
-.code_circle{
-  width: 10px;
-  height: 10px;
-  background: black;
-  margin: 15px;
-  margin-left: 28px;
   margin-right: 0;
   border-radius: 50%;
   display: inline-block;
