@@ -17,9 +17,8 @@ get '/mastermind/' do
     redirect to('/mastermind/play')
   elsif game_type == 'codemaster'
     game.choose_game_type(game_type)
-    game.create_board("BGBG")
-    #redirect to('/mastermind/create-code')
-    redirect to('/mastermind/play')
+    game.create_board("    ")
+    redirect to('/mastermind/create-code')
   else
     redirect to('/mastermind')
   end
@@ -27,17 +26,22 @@ end
 
 get '/mastermind/play' do
   if game.codebreaker.is_a?(AI)
+    @button_message = "Again!"
     until game.board.solved?
       game.guess
     end
+  else
+    @button_message = "Guess!"
   end
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
-  p @feedback
   erb :game_board
 end
 
 get '/mastermind/create-code' do
+  @button_message = "Encode!"
+  @colors = game.full_name_guesses
+  @feedback = game.board.feedback
   erb :game_board
 end
 
@@ -51,6 +55,10 @@ end
 
 get /\/mastermind\/([RGBOPW]{4})/ do
   guess = params['captures'].first
-  game.guess(guess)
+  if game.board.code == "    "
+    game.board.code = guess
+  else
+    game.guess(guess)
+  end
   redirect to('/mastermind/play')
 end

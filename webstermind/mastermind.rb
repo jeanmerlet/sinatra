@@ -7,7 +7,9 @@ class Mastermind
   end
 
   def guess(guess = nil)
+    print "AM HERERERERERE"
     guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback, guess)
+    p guess
     @board.update_guesses(guess)
     @full_name_guesses[@turn] = full_names(@board.guesses[@turn])
     @board.update_feedback(@turn)
@@ -57,6 +59,7 @@ end
 
 class Board
   attr_reader :guesses, :feedback
+  attr_accessor :code
 
   def initialize(code)
     @code = code
@@ -133,6 +136,12 @@ class AI
     def initialize
       super
       @code_set = @colors.repeated_permutation(4).to_a.map { |x| x.join }
+      p @code_set.size
+      p @code_set.size
+      p @code_set.size
+      p @code_set.size
+      p @code_set.size
+      p @code_set.size
       @parsed_feedback = []
     end
 
