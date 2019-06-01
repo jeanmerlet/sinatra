@@ -19,8 +19,37 @@
   <% end %>
 </div>
 <div class="feedback">
-  <div class="feedback_circle">
-    <% if %>
+  <div class="feedback_circle"
+    <% case @feedback[index][0]
+    when "+" %>
+    style="background:red;"
+    <% when "-" %>
+    style="background:white;"
     <% end %>
+  >
+  </div>
+  <div class="feedback_circle"
+    <% case @feedback[index][1]; when "+" %>
+    style="background:red;"
+    <% when "-" %>
+    style="background:white;"
+    <% end %>
+  >
+  </div>
+  <div class="feedback_circle"
+    <% case @feedback[index][2]; when "+" %>
+    style="background:red;"
+    <% when "-" %>
+    style="background:white;"
+    <% end %>
+  >
+  </div>
+  <div class="feedback_circle"
+    <% case @feedback[index][3]; when "+" %>
+    style="background:red;"
+    <% when "-" %>
+    style="background:white;"
+    <% end %>
+  >
   </div>
 </div>

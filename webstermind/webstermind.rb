@@ -17,7 +17,7 @@ get '/mastermind/' do
     redirect to('/mastermind/play')
   elsif game_type == 'codemaster'
     game.choose_game_type(game_type)
-    game.create_board("PPPW")
+    game.create_board("BGBG")
     #redirect to('/mastermind/create-code')
     redirect to('/mastermind/play')
   else
@@ -33,6 +33,7 @@ get '/mastermind/play' do
   end
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
+  p @feedback
   erb :game_board
 end
 

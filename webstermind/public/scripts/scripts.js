@@ -10,7 +10,7 @@ function ball_picker(color) {
   }
 }
 
-function turn_submit(is_code) {
+function turn_submit() {
   var guess = ""
   var ball_display = document.getElementById("ball_display")
   for (i = 0; i < 4; i++) {

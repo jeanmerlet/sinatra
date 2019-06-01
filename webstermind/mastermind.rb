@@ -10,7 +10,7 @@ class Mastermind
     guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback, guess)
     @board.update_guesses(guess)
     @full_name_guesses[@turn] = full_names(@board.guesses[@turn])
-    @board.update_feedback
+    @board.update_feedback(@turn)
     @turn += 1
   end
 
@@ -61,17 +61,17 @@ class Board
   def initialize(code)
     @code = code
     @guesses = []
-    @feedback = []
+    @feedback = Array.new(12) { "    " }
   end
 
-  def update_feedback
+  def update_feedback(turn)
     code = @code.dup
     guess = @guesses.last.dup
-    @feedback << ""
+    result = []
 
     4.times do |i|
       if guess[i] == code[i]
-        @feedback.last << "+"
+        result << "+"
         code[i] = "0"
         guess[i] = "1"
       end
@@ -79,13 +79,14 @@ class Board
 
     4.times do |i|
       if code.include?(guess[i])
-        @feedback.last << "-" 
+        result << "-" 
         code[code.index(guess[i])] = "0"
         guess[i] = "1"
       end
     end
 
-    (4 - @feedback.last.length).times { @feedback.last << " " }
+    (4 - result.length).times { result << " " }
+    @feedback[turn] = result
   end
 
   def update_guesses(guess)

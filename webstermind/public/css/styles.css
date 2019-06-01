@@ -57,7 +57,7 @@ button {
 }
 
 #ball_display{
-  width: 140px;
+  width: 148px;
   height: 40px;
   background: #5e3315;
   margin: 5px auto;
@@ -85,7 +85,7 @@ button {
   height: 10px;
   background: black;
   margin: 15px;
-  margin-left: 20px;
+  margin-left: 22px;
   margin-right: 0;
   border-radius: 50%;
   display: inline-block;
@@ -93,11 +93,23 @@ button {
 }
 
 .feedback{
-  width: 29px;
-  height: 29px;
+  width: 27px;
+  height: 28px;
   margin: 5px;
   display: inline-block;
   border: 1px black solid;
   border-radius: 3px;
   float: right;
+}
+
+.feedback_circle{
+  width: 6px;
+  height: 6px;
+  background: black;
+  margin: 4px;
+  margin-left: 5px;
+  margin-right: 0;
+  border-radius: 50%;
+  display: inline-block;
+  float: left;
 }
