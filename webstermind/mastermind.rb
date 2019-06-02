@@ -1,15 +1,14 @@
 class Mastermind
-  attr_reader :board, :code, :codebreaker, :full_name_guesses
+  attr_reader :board, :codebreaker, :full_name_guesses
 
   def initialize
     @turn = 0
     @full_name_guesses = Array.new(12, "")
+    @board = Board.new
   end
 
   def guess(guess = nil)
-    print "AM HERERERERERE"
     guess = @codebreaker.guess(@turn, @board.guesses, @board.feedback, guess)
-    p guess
     @board.update_guesses(guess)
     @full_name_guesses[@turn] = full_names(@board.guesses[@turn])
     @board.update_feedback(@turn)
@@ -21,11 +20,7 @@ class Mastermind
   end
 
   def create_code(code = "")
-    @code = @codemaster.create_code(code)
-  end
-
-  def create_board(code)
-    @board = Board.new(code)
+    @board.code = @codemaster.create_code(code)
   end
 
   def full_names(guess)
@@ -42,6 +37,12 @@ class Mastermind
       end
     end
     result
+  end
+
+  def reset
+    @turn = 0
+    @full_name_guesses = Array.new(12, "")
+    @board = Board.new
   end
 
   private
@@ -61,8 +62,8 @@ class Board
   attr_reader :guesses, :feedback
   attr_accessor :code
 
-  def initialize(code)
-    @code = code
+  def initialize
+    @code = ""
     @guesses = []
     @feedback = Array.new(12) { "    " }
   end
@@ -136,12 +137,6 @@ class AI
     def initialize
       super
       @code_set = @colors.repeated_permutation(4).to_a.map { |x| x.join }
-      p @code_set.size
-      p @code_set.size
-      p @code_set.size
-      p @code_set.size
-      p @code_set.size
-      p @code_set.size
       @parsed_feedback = []
     end
 

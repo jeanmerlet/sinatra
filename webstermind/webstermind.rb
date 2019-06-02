@@ -5,22 +5,22 @@ require './mastermind.rb'
 game = Mastermind.new
 
 get '/mastermind' do
+  game.reset
   erb :index
 end
 
 get '/mastermind/' do
   game_type = params["game_type"]
-  if game_type == 'codebreaker'
-    game.choose_game_type(game_type)
-    game.create_code
-    game.create_board(game.code)
-    redirect to('/mastermind/play')
-  elsif game_type == 'codemaster'
-    game.choose_game_type(game_type)
-    game.create_board("    ")
-    redirect to('/mastermind/create-code')
-  else
+  if game_type != 'codebreaker' && game_type != 'codemaster'
     redirect to('/mastermind')
+  else
+    game.choose_game_type(game_type)
+    if game_type == 'codebreaker'
+      game.create_code
+      redirect to('/mastermind/play')
+    else game_type == 'codemaster'
+      redirect to('/mastermind/create-code')
+    end
   end
 end
 
@@ -35,27 +35,21 @@ get '/mastermind/play' do
   end
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
+  @win = game.board.solved?
   erb :game_board
 end
 
 get '/mastermind/create-code' do
+  redirect to('/mastermind/play') if game.board.code != ""
   @button_message = "Encode!"
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
   erb :game_board
 end
 
-get /\/mastermind\/code=([RGBOPW]{4})/ do
-  guess = params['captures'].first
-  if game.board.nil?
-    game.create_code(guess)
-    game.create_board(game.code)
-  end
-end
-
 get /\/mastermind\/([RGBOPW]{4})/ do
   guess = params['captures'].first
-  if game.board.code == "    "
+  if game.board.code == ""
     game.board.code = guess
   else
     game.guess(guess)
