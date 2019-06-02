@@ -1,2 +1,2 @@
-require './web_cipher/web_cipher'
+require './sinatra_games'
 run Sinatra::Application
