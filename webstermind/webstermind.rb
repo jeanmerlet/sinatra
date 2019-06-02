@@ -1,9 +1,8 @@
-set :root, File.dirname('./webstermind/')
-
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require './mastermind.rb'
 
+set :root, File.dirname('./webstermind/')
+require './mastermind.rb'
 
 game = Mastermind.new
 
