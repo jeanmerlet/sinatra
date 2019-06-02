@@ -6,7 +6,7 @@ game = Mastermind.new
 
 get '/mastermind' do
   game.reset
-  erb :index
+  erb :game_choice
 end
 
 get '/mastermind/' do
