@@ -1,71 +1,72 @@
 <script type="text/javascript" src="/scripts/scripts.js" async></script>
-<div id="board">
-  <div id="title_container"><span id="title">Mastermind</span></div>
-  <div id="ball_input_container">
-    <div class="circle">
-      <img onclick="ball_picker('blue');" src="/images/blue_ball.png"  alt="blue ball">
-    </div>
-    <div class="circle">
-      <img onclick="ball_picker('green');" src="/images/green_ball.png" alt="green ball">
-    </div>
-    <div class="circle">
-      <img onclick="ball_picker('orange');" src="/images/orange_ball.png" alt="orange ball">
-    </div>
-    <div class="circle">
-      <img onclick="ball_picker('purple');" src="/images/purple_ball.png" alt="purple ball">
-    </div>
-    <div class="circle">
-      <img onclick="ball_picker('red');" src="/images/red_ball.png" alt="red ball">
-    </div>
-    <div class="circle">
-      <img onclick="ball_picker('white');" src="/images/white_ball.png" alt="white ball">
-    </div>
+<div id="ball_input_container">
+  <div class="circle">
+    <img onclick="ball_picker('blue');" src="/images/blue_ball.png"  alt="blue ball">
   </div>
-  <div id="ball_display">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
+  <div class="circle">
+    <img onclick="ball_picker('green');" src="/images/green_ball.png" alt="green ball">
   </div>
-  <div id="turn_submit">
+  <div class="circle">
+    <img onclick="ball_picker('orange');" src="/images/orange_ball.png" alt="orange ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('purple');" src="/images/purple_ball.png" alt="purple ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('red');" src="/images/red_ball.png" alt="red ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('white');" src="/images/white_ball.png" alt="white ball">
+  </div>
+</div>
+<div id="ball_display">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+<div id="turn_submit_container">
+  <% if @win %>
+    <button type="button" onclick="new_game();">
+  <% else %>
     <button type="button" onclick="turn_submit();">
-      <%= @button_message %>
-    </button>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 0 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 1 } %>
- </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 2 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 3 } %>
- </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 4 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 5 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 6 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 7 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 8 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 9 } %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 10} %>
-  </div>
-  <div class="row">
-    <%= erb :board_row, :locals => { :index => 11} %>
- </div>
+  <% end %>
+    <%= @button_message %>
+  </button>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 0 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 1 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 2 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 3 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 4 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 5 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 6 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 7 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 8 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 9 } %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 10} %>
+</div>
+<div class="row">
+  <%= erb :board_row, :locals => { :index => 11} %>
 </div>

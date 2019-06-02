@@ -5,6 +5,9 @@
     <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
   </head>
   <body ondragstart="return false">
-    <%= yield %>
+    <div id="board">
+      <div id="title_container"><span id="title">Mastermind</span></div>
+        <%= yield %>
+    </div>
   </body>
 </html>

@@ -26,16 +26,12 @@ end
 
 get '/mastermind/play' do
   if game.codebreaker.is_a?(AI)
-    @button_message = "Again!"
-    until game.board.solved?
-      game.guess
-    end
-  else
-    @button_message = "Guess!"
+    game.guess until game.board.solved?
   end
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
   @win = game.board.solved?
+  @button_message = (@win ? "Again!" : "Guess!")
   erb :game_board
 end
 
@@ -44,6 +40,7 @@ get '/mastermind/create-code' do
   @button_message = "Encode!"
   @colors = game.full_name_guesses
   @feedback = game.board.feedback
+  @win = false
   erb :game_board
 end
 

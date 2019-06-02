@@ -21,6 +21,19 @@ button {
   border-radius: 3px;
 }
 
+input {
+  background: #5e3315;
+  border: black solid 1px;
+  width: 150px;
+  height: 36px;
+  position: center;
+  font-family: "Aldrich";
+  font-size: 20px;
+  margin: 5px auto;
+  margin-left: 15px;
+  border-radius: 3px;
+}
+
 #board{
   width: 290px;
   height: 780px;
@@ -65,10 +78,17 @@ button {
   border-radius: 5px;
 }
 
-#turn_submit{
+#turn_submit_container{
   width: 150px;
   height: 40px;
   margin: 0 auto;
+}
+
+.game_type_container{
+  width: 180px;
+  height: 40px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .row{

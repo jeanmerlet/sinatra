@@ -23,9 +23,13 @@ function send_guess(guess) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-      window.location = "/mastermind/play"
+      window.location.href = "/mastermind/play"
     }
   }
-  xmlhttp.open("GET", guess, true);
-  xmlhttp.send(null);
+  xmlhttp.open("GET", guess, true)
+  xmlhttp.send(null)
+}
+
+function new_game() {
+  window.location.href = "/mastermind"
 }
