@@ -1,8 +1,5 @@
-require 'sinatra'
-require 'sinatra/reloader' if development?
-
-get '/' do
-  erb :index
+get '/web_cipher' do
+  erb :web_cipher
 end
 
 post '/cipher/' do

@@ -1,12 +1,9 @@
-require 'sinatra'
-require 'sinatra/reloader'
-
 number = 1 + rand(100)
 
-get '/' do
+get '/web_guesser' do
   guess = params["guess"].to_i
   message = check_guess(guess, number)
-  erb :index, :locals => {:number => number, :message => message}
+  erb :web_guesser, :locals => {:number => number, :message => message}
 end
 
 def check_guess(guess, number)

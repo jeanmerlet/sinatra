@@ -1,2 +1,2 @@
-require './sinatra_games'
+require './webstermind/webstermind'
 run Sinatra::Application
