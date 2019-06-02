@@ -1,4 +1,4 @@
-set :root, File.dirname(./webstermind/)
+set :root, File.dirname('./webstermind/')
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
