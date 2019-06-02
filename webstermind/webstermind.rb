@@ -4,6 +4,10 @@ require './mastermind.rb'
 
 game = Mastermind.new
 
+get '/' do
+  redirect to('/mastermind')
+end
+
 get '/mastermind' do
   game.reset
   erb :game_choice
