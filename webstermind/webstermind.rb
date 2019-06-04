@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require './webstermind/mastermind.rb'
+require './mastermind.rb' if development?
 
 game = Mastermind.new
 
