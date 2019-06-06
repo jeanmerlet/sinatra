@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sysrandom/securerandom'
+require 'sysrandom/securerandom' if development?
 require 'sinatra/reloader' if development?
 
 enable :sessions
