@@ -124,7 +124,6 @@ end
 
 get '/mastermind/new' do
   if game.solved?(session[:guesses], session[:code]) || session[:code].nil?
-    p "MEWOMEMWOMEEWOEMOWMEWOEOWE"
     session.clear
     session[:guesses], session[:feedback], session[:turn] = *game.reset
   end
