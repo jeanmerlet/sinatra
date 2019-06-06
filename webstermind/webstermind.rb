@@ -1,8 +1,11 @@
 require 'sinatra'
+require 'sysrandom/securerandom'
 require 'sinatra/reloader' if development?
 
 enable :sessions
 set :session_secret, ENV['SESSION_KEY']
+set :session_secret, SecureRandom.hex(64) if development?
+set :sessions, :expire_after => 2592000
 
 class MastermindSessionManager
   def initialize
@@ -98,6 +101,10 @@ end
 game = MastermindSessionManager.new
 
 get '/' do
+  redirect to('/mastermind/new')
+end
+
+get '/mastermind' do
   redirect to('/mastermind/new')
 end
 
