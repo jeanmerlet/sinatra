@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 
 enable :sessions
+set :session_secret, ENV['SESSION_KEY']
 
 class MastermindSessionManager
   def initialize

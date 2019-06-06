@@ -6,22 +6,15 @@ body {
 img {
   margin-left: -10px;
   margin-top: -9px;
+  user-select: none;
 }
 
-button {
-  background: #5e3315;
-  border: black solid 1px;
-  width: 100px;
-  height: 30px;
-  position: center;
+p {
   font-family: "Aldrich";
-  font-size: 18px;
-  margin: 5px auto;
-  margin-left: 25px;
-  border-radius: 3px;
+  font-size: 16px;
 }
 
-input {
+.choice_button {
   background: #5e3315;
   border: black solid 1px;
   width: 150px;
@@ -34,6 +27,27 @@ input {
   border-radius: 3px;
 }
 
+.choice_button:hover {
+  background-color: #D88939;
+}
+
+#guess_button {
+  background-color: #5e3315;
+  border: black solid 1px;
+  width: 100px;
+  height: 30px;
+  position: center;
+  font-family: "Aldrich";
+  font-size: 18px;
+  margin: 5px auto;
+  margin-left: 25px;
+  border-radius: 3px;
+}
+
+#guess_button:hover {
+  background-color: #D88939;
+}
+
 #board{
   width: 290px;
   height: 780px;
@@ -44,6 +58,12 @@ input {
   margin-top: -380px;
   margin-left: -150px;
   border-radius: 15px;
+}
+
+#rules_container{
+  margin: 20px auto;
+  width: 270px;
+  text-align: left;
 }
 
 #title_container{
@@ -69,7 +89,13 @@ input {
   margin-top: -10px;
 }
 
-#ball_display{
+#turn_submit_container{
+  width: 150px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.ball_display{
   width: 148px;
   height: 40px;
   background: #5e3315;
@@ -78,17 +104,12 @@ input {
   border-radius: 5px;
 }
 
-#turn_submit_container{
-  width: 150px;
-  height: 40px;
-  margin: 0 auto;
-}
-
 .game_type_container{
   width: 180px;
   height: 40px;
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-top: -10px;
+  margin-bottom: 20px;
 }
 
 .row{

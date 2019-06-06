@@ -19,7 +19,7 @@
     <img onclick="ball_picker('W');" src="/images/W_ball.png" alt="white ball">
   </div>
 </div>
-<div id="ball_display">
+<div class="ball_display" id="ball_picker">
   <div class="circle"></div>
   <div class="circle"></div>
   <div class="circle"></div>
@@ -27,10 +27,10 @@
 </div>
 <div id="turn_submit_container">
   <% if @new_game %>
-    <button type="button" onclick="new_game();">
+    <button id="guess_button" type="button" onclick="new_game();">
     Again!
   <% else %>
-    <button type="button" onclick="turn_submit();">
+    <button id="guess_button" type="button" onclick="turn_submit();">
     Guess!
   <% end %>
   </button>

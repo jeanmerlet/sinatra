@@ -1,8 +1,34 @@
 <form action="/mastermind/choose-game-type" method="GET">
   <div class="game_type_container">
-    <p><input type='submit' name='game_type' value='codemaster' /></p>
+    <input class="choice_button" type='submit' name='game_type' value='codemaster' />
   </div>
   <div class="game_type_container">
-    <p><input type='submit' name='game_type' value='codebreaker' /></p>
+    <input class="choice_button" type='submit' name='game_type' value='codebreaker' />
   </div>
 </form>
+<div id="rules_container">
+  <p>Mastermind is a game of code breaking. You have 12 turns to guess the secret code. The code is composed of any combination of 4 colored balls from a pool of 6 different color balls, with repetition of the same color allowed. Example code:
+  </p>
+  <div class="ball_display">
+    <div class = "circle"><img src="/images/P_ball.png" alt="blue ball"></div>
+    <div class = "circle"><img src="/images/G_ball.png" alt="blue ball"></div>
+    <div class = "circle"><img src="/images/R_ball.png" alt="blue ball"></div>
+    <div class = "circle"><img src="/images/R_ball.png" alt="blue ball"></div>
+  </div>
+  <p>After each guess, you will receive between 0 and 4 feedback pegs based on your guess. The pegs can either be red or white in color. A red peg signifies one of the balls you guessed was in the correct spot and of the correct color. A white peg signifies one of the balls you guessed was in an incorrect spot but of the correct color. Example guess and feedback based on above code:
+  </p>
+  <div class="row">
+    <div class="circle"><img src="/images/B_ball.png" alt="blue_ball"></div>
+    <div class="circle"><img src="/images/G_ball.png" alt="green_ball"></div>
+    <div class="circle"><img src="/images/R_ball.png" alt="red_ball"></div>
+    <div class="circle"><img src="/images/P_ball.png" alt="purple_ball"></div>
+    <div class="feedback">
+      <div class="feedback_circle" style="background:red;"></div>
+      <div class="feedback_circle" style="background:red;"></div>
+      <div class="feedback_circle" style="background:white;"></div>
+      <div class="feedback_circle"></div>
+    </div>
+  </div>
+  <p>Alternatively, you can choose to be codemaster. You will select your own code and watch the AI solve it (nearly instantly!), with each of the AI guesses and feedback displayed.
+  </p>
+</div>

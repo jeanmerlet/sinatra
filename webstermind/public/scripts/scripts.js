@@ -1,7 +1,7 @@
 var spot = 0
 
 function ball_picker(color) {
-  var div = document.getElementById("ball_display")
+  var div = document.getElementById("ball_picker")
   div.children[spot].innerHTML = "<img src='/images/" + color + "_ball.png' alt='" + color + " ball'>"
   if (spot < 3) {
     spot ++
@@ -12,7 +12,7 @@ function ball_picker(color) {
 
 function turn_submit() {
   var guess = ""
-  var ball_display = document.getElementById("ball_display")
+  var ball_display = document.getElementById("ball_picker")
   for (i = 0; i < 4; i++) {
     var guess = guess.concat(ball_display.children[i].children[0].alt.charAt(0).toUpperCase())
   }
