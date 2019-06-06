@@ -53,10 +53,10 @@ p {
   height: 780px;
   background: #75411c;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -380px;
-  margin-left: -150px;
+  top: 0;
+  left: 0;
+  margin-top: 20px;
+  margin-left: 20px;
   border-radius: 15px;
 }
 
