@@ -31,5 +31,5 @@ function send_guess(guess) {
 }
 
 function new_game() {
-  window.location.href = "/mastermind"
+  window.location.href = "/mastermind/new"
 }

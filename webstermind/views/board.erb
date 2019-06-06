@@ -1,0 +1,73 @@
+<script type="text/javascript" src="/scripts/scripts.js" async></script>
+<div id="ball_input_container">
+  <div class="circle">
+    <img onclick="ball_picker('B');" src="/images/B_ball.png"  alt="blue ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('G');" src="/images/G_ball.png" alt="green ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('O');" src="/images/O_ball.png" alt="orange ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('P');" src="/images/P_ball.png" alt="purple ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('R');" src="/images/R_ball.png" alt="red ball">
+  </div>
+  <div class="circle">
+    <img onclick="ball_picker('W');" src="/images/W_ball.png" alt="white ball">
+  </div>
+</div>
+<div id="ball_display">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+<div id="turn_submit_container">
+  <% if @new_game %>
+    <button type="button" onclick="new_game();">
+    Again!
+  <% else %>
+    <button type="button" onclick="turn_submit();">
+    Guess!
+  <% end %>
+  </button>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 0 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 1 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 2 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 3 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 4 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 5 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 6 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 7 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 8 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 9 } %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 10} %>
+</div>
+<div class="row">
+  <%= erb :row, :locals => { :index => 11} %>
+</div>

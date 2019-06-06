@@ -1,59 +1,158 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require './mastermind.rb' if development?
 
-game = Mastermind.new
+enable :sessions
+
+class MastermindSessionManager
+  def initialize
+    @colors = ["B", "G", "O", "P", "R", "W"]
+    @code_set = @colors.repeated_permutation(4).to_a.map { |x| x.join }
+    @parsed_feedback = []
+  end
+
+  def create_code
+    code = ""
+    4.times { code << @colors[rand(6)] }
+    code
+  end
+
+  def update_guesses(guess, guesses, turn)
+    guesses[turn] = guess
+  end
+
+  def update_feedback(code, guess, feedback, turn)
+    _code = code.dup
+    _guess = guess.dup
+    result = []
+
+    4.times do |i|
+      if _guess[i] == _code[i]
+        result << "+"
+        _code[i] = "0"
+        _guess[i] = "1"
+      end
+    end
+
+    4.times do |i|
+      if _code.include?(_guess[i])
+        result << "-" 
+        _code[_code.index(_guess[i])] = "0"
+        _guess[i] = "1"
+      end
+    end
+
+    (4 - result.length).times { result << " " }
+    feedback[turn] = result
+  end
+
+  def reset
+    @code_set = @colors.repeated_permutation(4).to_a.map { |x| x.join }
+    @parsed_feedback = []
+    guesses = Array.new(12) { "" }
+    feedback = Array.new(12) { "    " }
+    turn = 0
+    [guesses, feedback, turn]
+  end
+
+  def guess(guesses, feedback, turn)
+    return "BBGG" if turn == 0
+    @parsed_feedback << count_feedback(feedback, turn)
+    eliminate_bad_guesses(guesses, turn)
+    @code_set[0]
+  end
+
+  def count_feedback(feedback, turn)
+    result = [0, 0]
+    4.times do |i|
+      result[0] += 1 if feedback[turn-1][i] == "+"
+      result[1] += 1 if feedback[turn-1][i] == "-"
+    end
+    result << result[0] + result[1]
+  end
+
+  def eliminate_bad_guesses(guesses, turn)
+    last_guess = guesses[turn-1]
+    @code_set -= [last_guess]
+
+    @code_set.reject! do |code|
+      matches = 0
+      perfect_matches = 0
+      temp_code = code.dup
+      result = false
+
+      4.times do |i|
+        if temp_code.include?(last_guess[i])
+          matches += 1
+          temp_code.sub!(/#{last_guess[i]}/, "0")
+        end
+        perfect_matches += 1 if code[i] == last_guess[i]
+      end
+
+      result = true if matches != @parsed_feedback.last[2] ||
+                       perfect_matches != @parsed_feedback.last[0]
+    end
+  end
+end
+
+game = MastermindSessionManager.new
 
 get '/' do
-  redirect to('/mastermind')
+  redirect to('/mastermind/new')
 end
 
-get '/mastermind' do
-  game.reset
-  erb :game_choice
+get '/mastermind/new' do
+  session.clear
+  session[:guesses], session[:feedback], session[:turn] = *game.reset
+  erb :choice
 end
 
-get '/mastermind/' do
-  game_type = params["game_type"]
-  if game_type != 'codebreaker' && game_type != 'codemaster'
-    redirect to('/mastermind')
-  else
-    game.choose_game_type(game_type)
+get '/mastermind/choose-game-type' do
+  game_type = params['game_type']
+  if (game_type == 'codebreaker' || game_type == 'codemaster')
+    session[:game_type] = game_type
     if game_type == 'codebreaker'
-      game.create_code
+      session[:code] = game.create_code
       redirect to('/mastermind/play')
-    else game_type == 'codemaster'
+    else
       redirect to('/mastermind/create-code')
     end
   end
 end
 
 get '/mastermind/play' do
-  if game.codebreaker.is_a?(AI)
-    game.guess until game.board.solved?
+  redirect to('/mastermind/new') if session[:code].nil?
+  if session['game_type'] == 'codemaster'
+    while !session[:guesses].include?(session[:code])
+      guess = game.guess(session[:guesses], session[:feedback], session[:turn])
+      game.update_guesses(guess, session[:guesses], session[:turn])
+      game.update_feedback(session[:code], guess, session[:feedback], session[:turn])
+      session[:turn] += 1
+    end
   end
-  @colors = game.full_name_guesses
-  @feedback = game.board.feedback
-  @win = game.board.solved?
-  @button_message = (@win ? "Again!" : "Guess!")
-  erb :game_board
+  @guesses = session[:guesses]
+  @feedback = session[:feedback]
+  @new_game = session[:guesses].include?(session[:code])
+  @new_game = true if session[:turn] >= 12
+  erb :board
 end
 
 get '/mastermind/create-code' do
-  redirect to('/mastermind/play') if game.board.code != ""
+  redirect to('/mastermind/play') if !session[:code].nil?
   @button_message = "Encode!"
-  @colors = game.full_name_guesses
-  @feedback = game.board.feedback
+  @guesses = session[:guesses]
+  @feedback = session[:feedback]
   @win = false
-  erb :game_board
+  erb :board
 end
 
-get /\/mastermind\/([RGBOPW]{4})/ do
+get /\/mastermind\/([BGOPRW]{4})/ do
   guess = params['captures'].first
-  if game.board.code == ""
-    game.board.code = guess
+  if session[:code].nil?
+    session[:code] = guess
   else
-    game.guess(guess)
+    game.update_guesses(guess, session[:guesses], session[:turn])
+    game.update_feedback(session[:code], guess, session[:feedback], session[:turn])
+    session[:turn] += 1
   end
   redirect to('/mastermind/play')
 end
