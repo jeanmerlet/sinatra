@@ -31,7 +31,11 @@
     Again!
   <% else %>
     <button id="guess_button" type="button" onclick="turn_submit();">
-    Guess!
+    <% if @encode %>
+      <%= @encode %>
+    <% else %>
+      Guess!
+    <% end %>
   <% end %>
   </button>
 </div>

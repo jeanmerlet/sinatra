@@ -58,6 +58,12 @@ class MastermindSessionManager
     [guesses, feedback, turn]
   end
 
+  def solved?(guesses, guess)
+    return false if guesses == nil or guess == nil
+    return true if guesses.include?(guess)
+    false
+  end
+
   def guess(guesses, feedback, turn)
     return "BBGG" if turn == 0
     @parsed_feedback << count_feedback(feedback, turn)
@@ -100,6 +106,10 @@ end
 
 game = MastermindSessionManager.new
 
+get '' do
+  redirect to('/mastermind/new')
+end
+
 get '/' do
   redirect to('/mastermind/new')
 end
@@ -108,9 +118,16 @@ get '/mastermind' do
   redirect to('/mastermind/new')
 end
 
+get '/mastermind/' do
+  redirect to('/mastermind/new')
+end
+
 get '/mastermind/new' do
-  session.clear
-  session[:guesses], session[:feedback], session[:turn] = *game.reset
+  if game.solved?(session[:guesses], session[:code]) || session[:code].nil?
+    p "MEWOMEMWOMEEWOEMOWMEWOEOWE"
+    session.clear
+    session[:guesses], session[:feedback], session[:turn] = *game.reset
+  end
   erb :choice
 end
 
@@ -119,7 +136,7 @@ get '/mastermind/choose-game-type' do
   if (game_type == 'codebreaker' || game_type == 'codemaster')
     session[:game_type] = game_type
     if game_type == 'codebreaker'
-      session[:code] = game.create_code
+      session[:code] = game.create_code if session[:code].nil?
       redirect to('/mastermind/play')
     else
       redirect to('/mastermind/create-code')
@@ -146,10 +163,9 @@ end
 
 get '/mastermind/create-code' do
   redirect to('/mastermind/play') if !session[:code].nil?
-  @button_message = "Encode!"
+  @encode = "Encode!"
   @guesses = session[:guesses]
   @feedback = session[:feedback]
-  @win = false
   erb :board
 end
 
