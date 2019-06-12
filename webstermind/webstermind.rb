@@ -65,10 +65,10 @@ class MastermindSessionManager
   end
 
   def guess(guesses, feedback, turn)
-    return "BBGG" if turn == 0
+    return @code_set[rand(@code_set.size)] if turn == 0
     @parsed_feedback << count_feedback(feedback, turn)
     eliminate_bad_guesses(guesses, turn)
-    @code_set[0]
+    @code_set[rand(@code_set.size)]
   end
 
   def count_feedback(feedback, turn)
