@@ -12,6 +12,7 @@ img {
 p {
   font-family: "Aldrich";
   font-size: 16px;
+  letter-spacing: -1px
 }
 
 .choice_button {
@@ -25,6 +26,7 @@ p {
   margin: 5px auto;
   margin-left: 15px;
   border-radius: 3px;
+  color: black;
 }
 
 .choice_button:hover {
@@ -42,6 +44,7 @@ p {
   margin: 5px auto;
   margin-left: 25px;
   border-radius: 3px;
+  color: black;
 }
 
 #guess_button:hover {
@@ -73,7 +76,7 @@ p {
   text-align: center;
   font-weight: bold;
   font-family: "Aldrich";
-  font-size: 40px;
+  font-size: 38px;
 }
 
 #title{
@@ -96,7 +99,7 @@ p {
 }
 
 .ball_display{
-  width: 148px;
+  width: 140px;
   height: 40px;
   background: #5e3315;
   margin: 5px auto;
@@ -113,7 +116,7 @@ p {
 }
 
 .row{
-  width: 180px;
+  width: 170px;
   height: 40px;
   background: #5e3315;
   margin: 5px auto;
@@ -126,7 +129,7 @@ p {
   height: 10px;
   background: black;
   margin: 15px;
-  margin-left: 22px;
+  margin-left: 20px;
   margin-right: 0;
   border-radius: 50%;
   display: inline-block;
