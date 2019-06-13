@@ -7,10 +7,6 @@ set :session_secret, ENV['SESSION_KEY']
 set :session_secret, SecureRandom.hex(64) if development?
 set :sessions, :expire_after => 2592000
 
-configure :production do
-  set :force_ssl, true
-end
-
 class MastermindSessionManager
   def initialize
     @colors = ["B", "G", "O", "P", "R", "W"]
